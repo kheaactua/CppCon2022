@@ -1,48 +1,290 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css">
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2
-						<aside class="notes">
-						<p>Some notes</p>
-						</aside>
-						<p>Some slide text</p>
-						<aside class="notes">
-						<p>and some more notes</p>
-					</aside>
-				</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <img src="images/web-header-2023.png" alt="CppCon 2022" />
+          <ul>
+            <li>Talks I Enjoys</li>
+            <li>Talks I want to highlight</li>
+            <li>Tools</li>
+          <ul>
+        </section>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+        <section>
+          <section>
+            <a href="https://cppcon.digital-medium.co.uk/session/2022/how-c23-changes-the-way-we-write-code/">How C++23 changes the way we write code</a> <span class="by">by</span> <span>Timur Doumler</span>
+            <ul>
+              <li>I recommend all videos by Timur</a>
+              <li>Discusses <code>std::mdspan</code>.  Amazing for md-arrays</li>
+              <li>Deducing &quot;<code>this</code>&quot;<ul>
+                  <li>See also <a href="https://devblogs.microsoft.com/cppblog/cpp23-deducing-this/">C++23’s Deducing this: what it is, why it is, how to use it</a> by Sy Brand</li></ul>
+            </ul>
+          </section>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+          <section>
+            <h3>Deducing <code>this</code></h3>
+            <img src="images/deducing_this.jpeg" alt="Example of deducing this" />
+          </section>
+          <section>
+            <ul>
+              <li>Simplifies <a href="https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern"><acronym title="Curiously recurring template pattern">CRTP</acronym></a></li>
+              <li>Forwarding out of lambdas</li>
+              <li>Allows recursive lambdas</li>
+            </ul>
+          </section>
+          <section>
+            <ul>
+              <li>De-quadruplication of code, <em>e.g.</em>
+              <ul>
+                <li><code>constexpr T& value() &</code></li>
+                <li><code>constexpr T const& value() const&</code></li>
+                <li><code>constexpr T&& value() &&</code></li>
+                <li><code>constexpr T const&& value() const&&</code></li>
+              </ul>
+              become:
+              <pre><code>template &lt;class Self&gt;
+  constexpr auto&& value(this Self&& self) {
+</code><pre></li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <a href="https://cppcon.digital-medium.co.uk/session/2022/taking-a-byte-out-of-c/">Taking a Byte Out of C++</a> <span class="by">by</span> <span>Robert Leahy</span>
+          <ul>
+            <li>C++ types are not simply a lens over memory</li>
+            <li>Illustrates how C++20 can explicitly implicitly start lifetimes</li>
+          </ul>
+        </section>
+
+        <section>
+          <a href="https://cppcon.digital-medium.co.uk/session/2022/reviewing-beginners-code/">Reviewing beginners code</a> <span class="by">by</span> <span>Patrice Roy</span>
+          <ul>
+            <li>How to provide feedback on a code review</li>
+          </ul>
+        </section>
+
+        <section>
+          <a href="https://cppcon.digital-medium.co.uk/session/2022/breaking-enigma-with-the-power-of-modern-c/">Breaking enigma with the Power of Modern C++</a> <span class="by">by</span> <span>Mathieu Ropert</span>
+          <p>A fun talk where the speaker tells the story of <a href="https://en.wikipedia.org/wiki/Marian_Rejewski">Marian Rejewski</a> and his role in breaking the Enigma code.  Throughout the talk he walks you through his modern code to show how to write a program to decrypt Enigma ciphers.</p>
+        </section>
+
+        <section>
+          <section>
+            <a href="https://cppcon.digital-medium.co.uk/session/2022/your-performance-todo-list/">Your Performance Todo List</a> <span class="by">by</span> <span>Jan Bielak</span>
+            <ul>
+              <li><a href="https://github.com/llvm/llvm-project/tree/main/bolt">BOLT</a> - BOLT is a post-link optimizer developed to speed up large applications</li>
+              <li>Link Time Optimization (LTO)</li>
+              <li>Profile guided optimization</li>
+              <li>Effective C++
+                <ul>
+                  <li><code>constexpr</code> all the things</li>
+                  <li><code>const</code> all the things</li>
+                  <li><code>noexcept</code> all the things</li>
+                </ul>
+              </li>
+              <li><a href="https://cmake.org/cmake/help/latest/prop_tgt/UNITY_BUILD.html">CMake UNITY_BUILD</a></li>
+            </ul>
+          </section>
+          <section>
+            <img src="images/take_parameters.jpeg" alt="Take Parameters Properly" />
+          </section>
+        </section>
+
+        <section>
+          <a href="https://cppcon.digital-medium.co.uk/session/2022/contemporary-c-in-action/">Contemporary C++ in action</a> <span class="by">by</span> <span>Daniela Engert</span>
+          <p>Awesome walk through of how she used C++20/C++23 features (modules, coroutines based on ASIO executors, <em>etc</em>) in her embedded network application.</p>
+        </section>
+
+        <section>
+          <a href="https://cppcon.digital-medium.co.uk/session/2022/embracing-trailing-return-types-and-auto-return-safely/">Embracing trailing return types and auto return safely</a> <span class="by">by</span> <span>Pablo Halpern</span>
+          <p>Title is self explanatory</p>
+        </section>
+
+
+        <section>
+          <a href="https://cppcon.digital-medium.co.uk/session/2022/using-modern-c-to-eliminate-virtual/">Using modern C++ to eliminate virtual</a> <span class="by">by</span> <span>Jonathan Gopel</span>
+          <p>Discusses methods in C++20 to eliminate the use of virtual functions, along with their trade offs</p>
+        </section>
+        <section>
+          <a href="https://cppcon.digital-medium.co.uk/session/2022/linux-debuginfo-formats/">Linux debuginfo formats</a> <span class="by">by</span> <span>Greg Law</span> (<a href="https://twitter.com/gregthelaw">@Gregthelaw</a>)
+          <ul>
+            <li>Great walk through on how debug info is stored in artifacts</li>
+            <li>I'd recommend all of Greg Law's videos</li>
+          </ul>
+        </section>
+
+        <section>
+          <a href="https://cppcon.digital-medium.co.uk/session/2022/cute-c-tricks-part-2-of-n/">Cute C++ tricks part 2.5 of <em>N</em></a> <span class="by">by</span> <span>Daisy Hollman</span>
+          <p>Daisy showcases many examples of &quot;<em>cute</em>&quot; C++ tricks that help explain how these various features work</p>
+          <pre><code data-line-numbers>#include &lt;array&gt;
+#include &lt;algorithm&gt;
+#include &lt;type_traits&gt;
+#include &lt;variant&gt;
+
+template &lt;class...&gt; struct type_list {};
+
+template &lt;size_t I, class... Ts&gt;
+using at_t = std::variant_alternative_t&lt;I+1, std::variant&lt;std::monostate, Ts...&gt;&gt;;
+
+template &lt;class List, auto Key&gt; struct sort;
+template &lt;class... Ts, auto Key&gt;
+struct sort&lt;type_list&lt;Ts...&gt;, Key&gt; : std::type_identity&lt;decltype(
+  []&lt;size_t... Idxs&gt;(std::index_sequence&lt;Idxs...&gt;){
+    constexpr auto sorted_indices = []{
+      std::array idxs = {Idxs...};
+      std::ranges::sort(idxs, [](size_t idx1, size_t idx2) {
+        using variant_t = std::variant&lt;std::type_identity&lt;Ts&gt;...&gt;;
+        std::array vars = {
+          variant_t{ std::in_place_index_t&lt;Idxs&gt;{} }...
+        };
+        return std::visit(Key, vars[idx1]) &lt; std::visit(Key, vars[idx2]);
+      });
+      return idxs;
+    }();
+    return type_list&lt;at_t&lt;sorted_indices[Idxs], Ts...&gt;...&gt;{};
+  }(std::index_sequence_for&lt;Ts...&gt;{})
+)&gt; {};
+
+static_assert(std::is_same_v&lt;
+  sort&lt;
+    type_list&lt;int[3], int[1], int[4]&gt;,
+    /* Key = */ []&lt;class T&gt;(std::type_identity&lt;T&gt;) {
+      return sizeof(T);  // for instance
+    }
+  &gt;::type,
+  type_list&lt;int[1], int[3], int[4]&gt;
+&gt;);
+</code></pre>
+          <p><a href="https://cute.godbolt.org/z/odsjjanez">Godbolt</a></p>
+        </section>
+
+        <section>
+          <a href="https://cppcon.digital-medium.co.uk/session/2022/the-hidden-performance-price-of-virtual-functions/">The hidden performance price of virtual functions</a> <span class="by">by</span> <span>Ivica Bogosavljevic</span>
+        </section>
+
+        <section>
+          <section>
+            <strong>Breaking dependencies</strong> (<a href="https://cppcon.digital-medium.co.uk/session/2022/breaking-dependencies/">part 1</a> and <a href="https://cppcon.digital-medium.co.uk/session/2022/breaking-dependencies-2/">part 2</a>) <span class="by">by</span> <span>Klaus Iglberger</span>
+            <p>Walk-through examples of various design patterns</p>
+            <p>Also see <a href="https://www.youtube.com/watch?v=iMzEUdacznQ">C++ Weekly - Ep 343 - Digging Into Type Erasure</a></p>
+          </section>
+          <section>
+            <h3>Type Erasure</h3>
+            <ul>
+              <li>hide the exact type of an object when you go to work with it</li>
+              <li>can work with any type that might be declared in the future</li>
+              <li>compilation firewall to prevent recompiling the entire library for adding a new type</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <h2>Tools</h2>
+
+          <section>
+          <ul>
+            <li><a href="https://github.com/llvm/llvm-project/tree/main/bolt">BOLT</a> - a post-link optimizer developed to speed up large applications</li>
+            <li><a href="https://cmake.org/cmake/help/latest/prop_tgt/UNITY_BUILD.html">CMake UNITY_BUILD</a></li>
+            <li><a href="https://developers.redhat.com/blog/2019/10/14/introducing-debuginfod-the-elfutils-debuginfo-server#how_do_i_use_debuginfod_">Debuginfod</a> - Webserver hosting debug symbols that GDB can pull from (required gdb 10)</a></li>
+          </ul>
+          </section>
+
+          <section>
+            <ul>
+              <li><code>split-dwarf</code>: If I understand correctly, this can be done during compilation (<code>--gsplit-dwarf</code>) to split off debug info right away to save the linker work - instead of splitting it in post-processing</li>
+              <li><a href="https://en.cppreference.com/w/cpp/utility/expected">std::expected</a> - C++23 (though easy to implement in earlier standards, we could put this in FSL) mechanism that can be a great alternative to exceptions</li>
+            </ul>
+          </section>
+
+        </section>
+
+        <section>
+          <h2>Other Talks</h2>
+
+          <section>
+            <a href="https://cppcon.digital-medium.co.uk/session/2022/back-to-basics-2/">Back to basics 2</a> <span class="by">by</span> <span>author</span> by <span class="author">Amir Kirsh</span>
+            <ul>
+              <li>Discusses testing</li>
+              <li>Shows examples with google test</li>
+            </ul>
+          </section>
+          <section>
+            <a href="https://cppcon.digital-medium.co.uk/session/2022/how-to-use-dependency-injection-to-write-maintainable-software/">How to use Dependency Injection to Write Maintainable Software</a> <span class="by">by</span> <span>Francesco Zoffoli</span>
+          </section>
+
+          <section>
+            <a href="https://cppcon.digital-medium.co.uk/session/2022/aliasing"/>Aliasing</a> <span class="by">by</span> <span>Roi Barkan</span>
+          </section>
+          <section>
+            <ul>
+              <li><a href="https://cppcon.digital-medium.co.uk/session/2022/import-cmake-cmake-and-c20-modules/">Import CMake CMake and C20 Modules</a></li>
+              <li><a href="https://cppcon.digital-medium.co.uk/session/2022/understanding-allocator-impact-on-runtime-performance/">Understanding Allocator Impact on Runtime Performance</a></li>
+              <li><a href="https://cppcon.digital-medium.co.uk/session/2022/whats-new-in-c23/">Whats New In C++23</a></li>
+              <li><a href="https://cppcon.digital-medium.co.uk/session/2022/c23/">C++23</a></li>
+              <li><a href="https://cppcon.digital-medium.co.uk/session/2022/whats-new-in-conan-2-0/">Whats New in Conan 2.0</a></li>
+            </ul>
+          </section>
+          <section>
+            <ul>
+              <li><a href="https://cppcon.digital-medium.co.uk/session/2022/optimization-remarks/">Optimization Remarks</a></li>
+              <li><a href="https://cppcon.digital-medium.co.uk/session/2022/memory-safe-c/">Memory Safe C++</a></li>
+              <li><a href="https://cppcon.digital-medium.co.uk/session/2022/github-features-every-c-developer-should-know/">GitHub Features Every C++ Developer Should Know</a></li>
+              <li><a href="https://www.youtube.com/watch?v=ELeZAKCN4tY&ab_channel=CppCon">Can C++ be 10x Simpler & Safer?</a> <span class="by">by</span> <span class="author">Herb Sutter</span></li>
+            </ul>
+          </section>
+          <section>
+            <ul>
+              <li><a href="https://www.youtube.com/watch?v=hdRpCo94_C4">CppCon 2018: R. Leahy &quot;The Networking TS in Practice: Testable, Composable Asynchronous I/O in C++&quot;</a></li>
+              <li><a href="https://www.youtube.com/watch?v=Iybb9wnpF00">C++ Weekly - Ep 338 - Analyzing and Improving Build Times</a></li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Co-Routines</h3>
+            <ul>
+              <li><a href="https://cppcon.digital-medium.co.uk/session/2022/coroutines-from-scratch/">Coroutines From Scratch</a></li>
+              <li><a href="https://cppcon.digital-medium.co.uk/session/2022/deciphering-coroutines/">Deciphering Coroutines</a></li>
+              <li><a href="https://cppcon.digital-medium.co.uk/session/2022/understanding-cpp-coroutines-by-example-1/">Understanding C++ Coroutines By Example 1</a></li>
+              <li><a href="https://cppcon.digital-medium.co.uk/session/2022/understanding-cpp-coroutines-by-example-2/">Understanding C++ Coroutines By Example 2</a></li>
+              <li><a href="https://cppcon.digital-medium.co.uk/session/2022/c-coroutines-from-scratch/">C++ Coroutines From Scratch</a></li>
+            </ul>
+          </section>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+      });
+    </script>
+  </body>
 </html>
+<!-- vim: set ts=2 sw=2 tw=0 expandtab :-->

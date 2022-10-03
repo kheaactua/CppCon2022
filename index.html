@@ -26,6 +26,21 @@
         </section>
 
         <section>
+          <h1>What is CppCon</h1>
+          <ol>
+            <li><a href="https://cppcon.org">https://cppcon.org</a></li>
+            <li>Annual C++ Conference - generally (always?) in Colorado</li>
+            <li>Common Tracks: Embedded, C++ Standard, Tools, Software Design, Scientific Software</li>
+            <li>Most talks are eventually posted on YouTube</a>
+          </ol>
+        </section>
+
+        <section>
+        <a href="https://www.youtube.com/watch?v=2BuJjaGuInI">C++ in Constrained Environments</a> <span class="by">by</span> <span>Bjarne Stroustrup</span>
+          <p>Great discussion of how to use C++, when to use new tools, what techniques to use, how to think about performance, think about safety, think about moving steps into the compilation, <em<etc</em>.</p>
+        </section>
+
+        <section>
           <section>
             <a href="https://cppcon.digital-medium.co.uk/session/2022/how-c23-changes-the-way-we-write-code/">How C++23 changes the way we write code</a> <span class="by">by</span> <span>Timur Doumler</span>
             <ul>
@@ -51,14 +66,14 @@
             <ul>
               <li>De-quadruplication of code, <em>e.g.</em>
               <ul>
-                <li><code>constexpr T& value() &</code></li>
-                <li><code>constexpr T const& value() const&</code></li>
-                <li><code>constexpr T&& value() &&</code></li>
-                <li><code>constexpr T const&& value() const&&</code></li>
+                <li><code>constexpr T&amp; value() &amp;</code></li>
+                <li><code>constexpr T const&amp; value() const&amp;</code></li>
+                <li><code>constexpr T&amp;&amp; value() &amp;&amp;</code></li>
+                <li><code>constexpr T const&amp;&amp; value() const&amp;&amp;</code></li>
               </ul>
               become:
               <pre><code>template &lt;class Self&gt;
-  constexpr auto&& value(this Self&& self) {
+  constexpr auto&amp;&amp; value(this Self&amp;&amp; self) {
 </code><pre></li>
             </ul>
           </section>
@@ -110,6 +125,7 @@
           <a href="https://cppcon.digital-medium.co.uk/session/2022/contemporary-c-in-action/">Contemporary C++ in action</a> <span class="by">by</span> <span>Daniela Engert</span>
           <p>Awesome walk through of how she used C++20/C++23 features (modules, coroutines based on ASIO executors, <em>etc</em>) in her embedded network application.</p>
         </section>
+
 
         <section>
           <a href="https://cppcon.digital-medium.co.uk/session/2022/embracing-trailing-return-types-and-auto-return-safely/">Embracing trailing return types and auto return safely</a> <span class="by">by</span> <span>Pablo Halpern</span>
@@ -209,9 +225,16 @@ static_assert(std::is_same_v&lt;
             <ul>
               <li><code>split-dwarf</code>: If I understand correctly, this can be done during compilation (<code>--gsplit-dwarf</code>) to split off debug info right away to save the linker work - instead of splitting it in post-processing</li>
               <li><a href="https://en.cppreference.com/w/cpp/utility/expected">std::expected</a> - C++23 (though easy to implement in earlier standards, we could put this in FSL) mechanism that can be a great alternative to exceptions</li>
+            <li><a href="https://godbolt.org/">Compiler Explorer</a> - Test your code against other compilers, see the assembly, experiment with flags</li>
             </ul>
           </section>
 
+          <section>
+            <ul>
+              <li><a href="https://github.com/include-what-you-use/include-what-you-use">include-what-you-use (IWYU)</a> - clang based tool to ensure you are using the proper includes.  Tricky to set up though.</li>
+              <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines">C++ Core Guidelines</code>: Documented conceptual framework for C++</a></li>
+            </ul>
+          </section>
         </section>
 
         <section>
